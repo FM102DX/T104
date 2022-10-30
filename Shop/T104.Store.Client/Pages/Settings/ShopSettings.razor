@@ -1,0 +1,29 @@
+﻿@page "/ShopSettings"
+@using Microsoft.AspNetCore.Authorization
+@using T104.Store.Engine
+@using T104.Store.Engine.Models
+@using T104.Store.DataAccess.DataAccess
+@attribute [Authorize]
+
+<h2>Shop settings</h2>
+
+<p>Here you can ajust shop settings</p>
+
+<p>ShopSettings col=@col</p>
+
+@foreach (ShopSettingDomain domain in settingDomains)
+{
+    <h4 class="text-primary"></h4>
+    <h4 class="text-primary">@domain.Name</h4>
+
+    List<ShopSetting> _lst = settingsListTmp.Where(x => x.Domain.DisplayOrder == domain.DisplayOrder).ToList();
+
+    @foreach (ShopSetting setting in _lst)
+    {
+        <ShopSettingEdititngUnit shopSetting="@setting"></ShopSettingEdititngUnit> 
+    }    
+}
+
+<button class="btn btn-sm btn-outline-dark" @onclick="OnSaveClick">Save</button>
+
+<BbAlertHub></BbAlertHub>

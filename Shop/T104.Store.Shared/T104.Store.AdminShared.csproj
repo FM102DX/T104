@@ -1,0 +1,16 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\FerryData.Engine\T104.Store.Engine2.csproj" />
+    <ProjectReference Include="..\Service\src\BBComponents\BBComponents.csproj" />
+    <ProjectReference Include="..\T104.Store.Core\T104.Store.Engine.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <SupportedPlatform Include="browser" />
+  </ItemGroup>
+</Project>

@@ -1,0 +1,37 @@
+﻿@page "/Item/{ItemId:guid}"
+@using T104.Store.FrontEnd.BlazorWASM.Components
+@using T104.Store.FrontEnd.BlazorWASM.Shared
+@using T104.Store.FrontEnd.BlazorWASM.Components.ObjectSelector; 
+
+<div class="SkuDetailPage">
+
+   <div class="SkuName">
+     <p> @ActualItem.FullName</p>
+    </div>
+
+    <div class="SkuNameSep"></div>
+    
+    <ObjectSelector @ref="SmallImgSelector"
+                    Objects="@DisplayedObjects" 
+                    SelectorPosition="@SelectorPosition" 
+                    HolderDivClass="MiniImageHolder SkuDetailPagePart" 
+                    RegularObjectDivClass="SkuDetailPageSmallPic SkuDetailPageSmallPicRegular" 
+                    SelectedObjectDivClass ="SkuDetailPageSmallPic SkuDetailPageSmallPicSelected"
+                    ObjectHeight ="0"
+                    ObjectWidth="70" />
+ 
+ <div class="BigImageHolder SkuDetailPagePart">
+     <img width="300px" src="@CurrentImageFullPath"/>
+ </div>
+
+ <div class="DescriptionHolder SkuDetailPagePart">
+      <p> @ActualItem.Description </p>
+</div>
+
+<div class="PriceBuyCard">
+      <p> @ActualItem.Price руб.</p>
+</div>
+
+
+
+</div>

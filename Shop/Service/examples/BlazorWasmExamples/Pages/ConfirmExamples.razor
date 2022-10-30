@@ -1,0 +1,100 @@
+﻿@page "/ConfirmExamples"
+
+
+<h3 class="text-primary">Confirm examples</h3>
+
+<hr />
+
+<h4 class="text-primary">Basic usage</h4>
+
+<div class="row">
+
+    <div class="col-sm-6">
+
+        <div class="form-group form-row">
+            <label class="col-sm-4 col-form-label-sm">Confirm size</label>
+            <div class="col-sm-8">
+                <BbSelect TValue="BBComponents.Enums.BootstrapModalSizes"
+                          ItemsSource="_availableSizes"
+                          ValueName="Item1"
+                          TextName="Item2"
+                          @bind-Value="_size"
+                          HtmlClass="form-control  form-control-sm"></BbSelect>
+            </div>
+        </div>
+
+        <button class="btn btn-success" @onclick="OnConfirmShowClick">Show confirm</button>
+    </div>
+
+    <div class="col-sm-6">
+        <div class="card">
+            <div class="card-header"><h4 class="card-title">Answers</h4></div>
+            <div class="list-group">
+                @foreach (var answer in _results)
+                {
+                    <div class="list-group-item">@answer</div>
+                }
+            </div>
+        </div>
+    </div>
+
+</div>
+
+@if (_isConfirmOpen)
+{
+    <BbConfirm Text="Do agree with... ?" OnClose="OnConfirmClose" Size="_size"></BbConfirm>
+}
+
+<hr />
+
+<div class="row">
+
+    <div class="col-sm-12 text-info">Razor</div>
+
+    <div class="col-sm-12">
+        <pre>
+            <code data-language="html">
+
+                &lt;!-- Button to show confirm -->
+                &lt;button class="btn btn-success" @@onclick="OnConfirmShowClick">Show confirm&lt;/button>
+
+                &lt;!-- Confirm component -->
+                @@if (_isConfirmOpen)
+                {
+                    &lt;BbConfirm Text="Do agree with... ?" OnClose="OnConfirmClose" Size="_size">&lt;/BbConfirm>
+                }
+
+            </code>
+         </pre>
+
+    </div>
+
+    <div class="col-sm-12 text-info">C#</div>
+
+    <div class="col-sm-12">
+
+        <pre>
+        <code data-language="csharp">
+                public partial class ConfirmExamples: ComponentBase
+                {
+                    private bool _isConfirmOpen;
+                    private List&lt;string> _results = new List&lt;string>();
+
+                    private void OnConfirmShowClick()
+                    {
+                       _isConfirmOpen = true;
+                    }
+
+                    private void OnConfirmClose(bool answer)
+                    {
+                       _results.Add($"Answer: {answer} at {DateTime.Now}");
+                       _isConfirmOpen = false;
+                    }
+                }
+            </code>
+        </pre>
+    </div>
+
+
+
+</div>

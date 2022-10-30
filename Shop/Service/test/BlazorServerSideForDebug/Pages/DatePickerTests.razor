@@ -1,0 +1,74 @@
+﻿@page "/datepicker"
+@using BBComponents.Enums
+
+<h1>Date picker tests</h1>
+
+<div class="row">
+
+    <div class="col-sm-6">
+        <BbDatePicker Format="MM/dd/yyyy" FirstWeekDay="BBComponents.Enums.FirstWeekDays.Sunday" Placeholder="Input date"></BbDatePicker>
+    </div>
+
+</div>
+
+<div class="row">
+
+    <div class="col-sm-6">
+        <BbDatePicker Format="MM/dd/yyyy" IsDisabled="true" FirstWeekDay="BBComponents.Enums.FirstWeekDays.Sunday"></BbDatePicker>
+    </div>
+
+</div>
+
+
+<div class="row" style="margin-top: 10px;">
+
+    <div class="col-sm-6">
+        <BbDatePicker Format="MM/dd/yyyy" FirstWeekDay="BBComponents.Enums.FirstWeekDays.Sunday" Size="BBComponents.Enums.BootstrapElementSizes.Sm"></BbDatePicker>
+    </div>
+
+</div>
+
+<div class="row" style="margin-top: 10px;">
+
+    <div class="col-sm-6">
+        <BbDatePicker Format="MM/dd/yyyy" FirstWeekDay="BBComponents.Enums.FirstWeekDays.Sunday" Size="BBComponents.Enums.BootstrapElementSizes.Lg"></BbDatePicker>
+    </div>
+
+</div>
+
+<div class="row" style="margin-top: 10px;">
+
+    <div class="col-sm-6">
+        <BbDatePicker Format="MM/dd/yyyy"
+                      Size="BBComponents.Enums.BootstrapElementSizes.Sm" @bind-Value="_lastDay"></BbDatePicker>
+    </div>
+
+    <div class="col-sm-6">
+
+        <p>@_lastDay</p>
+
+    </div>
+
+</div>
+
+<div class="row" style="margin-top: 10px;">
+
+    <div class="col-sm-6">
+        <BbDatePicker Format="MM/dd/yyyy"
+                      FirstWeekDay="FirstWeekDays.Sunday"
+                      Size="BootstrapElementSizes.Sm"
+                      DropdownPosition="DropdownPositions.Fixed"></BbDatePicker>
+    </div>
+
+</div>
+
+<div class="row" style="margin-top: 10px;">
+
+    <div class="col-sm-6">
+        <BbDatePicker Format="dd.MM.yyyy"
+                      Size="BBComponents.Enums.BootstrapElementSizes.Sm"></BbDatePicker>
+    </div>
+
+</div>
+
+

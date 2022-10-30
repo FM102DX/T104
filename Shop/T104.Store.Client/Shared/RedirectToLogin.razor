@@ -1,0 +1,12 @@
+﻿@inject NavigationManager Navigation
+@inject Serilog.ILogger Logger
+
+@using Microsoft.AspNetCore.Components.WebAssembly.Authentication
+
+@code {
+    protected override void OnInitialized()
+    {
+        Logger.Information($"Regdirect to login url={Uri.EscapeDataString(Navigation.Uri)}");
+        Navigation.NavigateTo($"authentication/login?returnUrl={Uri.EscapeDataString(Navigation.Uri)}");
+    }
+}

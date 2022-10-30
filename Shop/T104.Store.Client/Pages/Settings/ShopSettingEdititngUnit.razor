@@ -1,0 +1,60 @@
+﻿@using BBComponents;
+@using BBComponents.Enums;
+
+<div class="form-group form-row">
+<label class="col-sm-4">@shopSetting.Title</label>
+
+@if (shopSetting.InnerType== Engine.Models.ShopSetting.SettingTypeEnum.String)
+{
+        <div class="col-sm-8">
+            <BbTextInput HtmlClass="form-control form-control-sm"
+                     @bind-Value="@shopSetting.Value"></BbTextInput>
+        </div>
+}
+@if (shopSetting.InnerType== Engine.Models.ShopSetting.SettingTypeEnum.Bool)
+{
+                            <div class="col-sm-8">
+        <BbCheckBox Id="flag-input" @bind-Value="@shopSetting.BoolValue"></BbCheckBox>
+                        </div>
+    
+}
+@if (shopSetting.InnerType== Engine.Models.ShopSetting.SettingTypeEnum.Double)
+{
+                        <div class="col-sm-8">
+                            <BbNumberInput TValue="double"
+                                           HtmlClass="form-control form-control-sm text-right"
+                                           @bind-Value="@shopSetting.DoubleValue"></BbNumberInput>
+                        </div>
+}
+
+@if (shopSetting.InnerType== Engine.Models.ShopSetting.SettingTypeEnum.Int)
+{
+                        <div class="col-sm-8">
+                            <BbNumberInput TValue="int"
+                                           HtmlClass="form-control form-control-sm text-right"
+                                           @bind-Value="@shopSetting.IntValue"></BbNumberInput>
+                        </div>
+}
+@if (shopSetting.InnerType== Engine.Models.ShopSetting.SettingTypeEnum.DateTime)
+{
+        <div class="col-sm-8">
+            <BbDatePicker @bind-Value="@shopSetting.DateTimeValue" 
+                          Format="dd.MM.yyyy" 
+                          Size="BootstrapElementSizes.Sm" >
+                            </BbDatePicker>
+        </div>
+}
+
+@if (shopSetting.InnerType== Engine.Models.ShopSetting.SettingTypeEnum.FixedEnum)
+{
+    <div class="col-sm-8">
+                    <BbSelect TValue="int"
+                          ItemsSource="@shopSetting.FixedEnumValueOptions"
+                          ValueName="Index"
+                          TextName="Text"
+                          @bind-Value="@shopSetting.IntValue"
+                          HtmlClass="form-control form-control-sm"></BbSelect>
+     </div>
+}
+
+</div>

@@ -1,0 +1,21 @@
+﻿
+@using T104.Store.FrontEnd.BlazorWASM.Components
+
+
+
+<div class="@ObjectDivClass" style="@ObjectDivStyle" @onclick="@(e => ImClicked())" >
+
+    @if(ImAnImage)
+    {
+        @if (ObjectWidth.Length>0)
+        {
+            <img  src="@FullPathToPicture" width="@ObjectWidth"/>
+        }
+        else
+        {
+            <img  src="@FullPathToPicture" height="@ObjectHeight"/>
+        }
+    }
+</div>
+
+ 

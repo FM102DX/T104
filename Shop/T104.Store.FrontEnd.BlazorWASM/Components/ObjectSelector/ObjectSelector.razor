@@ -1,0 +1,14 @@
+﻿
+@using T104.Store.FrontEnd.BlazorWASM.Components
+@using T104.Store.FrontEnd.BlazorWASM.Components.ObjectSelector
+
+<div class="@HolderDivClass " style="@HolderDivStyle">
+
+    @foreach (var obj in Objects)
+    {
+        <SelectableObjectComponent Parent="@Selector"  SourceObject="@obj" />
+    }
+
+</div>
+
+ 

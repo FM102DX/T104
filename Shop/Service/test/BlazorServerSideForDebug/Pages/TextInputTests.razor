@@ -1,0 +1,34 @@
+﻿@page "/inputtext"
+
+<h3>Input text</h3>
+
+
+<div class="row">
+
+    <div class="col-sm-6">
+        <BbTextInput @bind-Value="_textValue" Placeholder="Some text"></BbTextInput>
+    </div>
+    <div class="col-sm-6">
+        @_textValue
+    </div>
+
+</div>
+<div class="row">
+
+    <div class="col-sm-6">
+        <BbTextInput IsDisabled="true" @bind-Value="_textValue" Mask="0000"></BbTextInput>
+    </div>
+
+</div>
+
+<div class="row">
+
+    <div class="col-sm-6">
+        <BbTextInput @bind-Value="_textMaskedValue" Mask="0000" MaskDescription="Введите 4 числа" Placeholder="Input four numbers"></BbTextInput>
+    </div>
+
+    <div class="col-sm-6">
+        @_textMaskedValue
+    </div>
+
+</div>

@@ -1,0 +1,199 @@
+﻿@page "/combobox"
+
+@using BBComponents.Enums
+
+<h3>ComboBoxTests</h3>
+
+<div class="row">
+
+    <div class="col-sm-6">
+        <BbComboBox TValue="int"
+                    ItemsSource="_products"
+                    TextName="Title"
+                    ValueName="Id"
+                    Size="BBComponents.Enums.BootstrapElementSizes.Sm"
+                    IsDeletedName="IsDeleted"
+                    Tooltip="Select product"
+                    @bind-Value="_selectedId"
+                    @bind-Text="_selectedText"></BbComboBox>
+    </div>
+
+    <div class="col-sm-6">
+
+        <div class="form-group form-row">
+
+            <label class="col-form-label col-sm-4">Selected value:</label>
+            <div class="col-sm-8">@_selectedId</div>
+
+
+        </div>
+
+        <div class="form-group form-row">
+
+            <label class="col-form-label col-sm-4">Selected text:</label>
+            <div class="col-sm-8">@_selectedText</div>
+
+
+        </div>
+
+    </div>
+
+</div>
+
+<div class="row">
+
+    <div class="col-sm-6">
+        <BbComboBox Id="product-1"
+                    TValue="int"
+                    ItemsSource="_products"
+                    TextName="Title"
+                    ValueName="Id"
+                    IsDisabled="true"
+                    Size="BBComponents.Enums.BootstrapElementSizes.Sm"
+                    IsDeletedName="IsDeleted"
+                    Tooltip="Select product"
+                    @bind-Value="_selectedId"
+                    @bind-Text="_selectedText" 
+                    OpenClicked="OnOpenClicked"></BbComboBox>
+    </div>
+
+    
+
+</div>
+
+
+<div class="row">
+
+    <div class="col-sm-6">
+
+        <BbComboBox Id="product-3" 
+                    TValue="int"
+                    ItemsSource="_products"
+                    TextName="Title"
+                    ValueName="Id"
+                    Size="BBComponents.Enums.BootstrapElementSizes.Sm"
+                    AllowAdd="true"
+                    IsDeletedName="IsDeleted"
+                    UseCustomMenu="true"
+                    @bind-Value="_selectedId2"
+                    @bind-Text="_selectedText2" 
+                    OpenClicked="OnOpenClicked"></BbComboBox>
+
+    </div>
+
+    <div class="col-sm-6">
+
+        <div class="form-group form-row">
+
+            <label class="col-form-label col-sm-4">Selected value:</label>
+            <div class="col-sm-8">@_selectedId2</div>
+
+        </div>
+
+        <div class="form-group form-row">
+
+            <label class="col-form-label col-sm-4">Selected value:</label>
+            <div class="col-sm-8">@_selectedText2</div>
+
+        </div>
+
+
+    </div>
+
+</div>
+
+@*<div class="row">
+
+        <div class="col-sm-6">
+
+            <BbSelect TValue="int"
+                      ItemsSource="_itemsPerPageSource"
+                      TextName="Item2"
+                      ValueName="Item1"
+                      @bind-Value="_itemsPerPage"></BbSelect>
+
+
+        </div>
+
+    </div>*@
+
+<div class="row">
+
+        <div class="col-sm-6">
+
+            <BbComboBox Id="1"
+                        TValue="int"
+                        ItemsSource="_products"
+                        TextName="Title"
+                        ValueName="Id"
+                        Size="BBComponents.Enums.BootstrapElementSizes.Sm"
+                        IsDeletedName="IsDeleted"
+                        @bind-Value="_selectedId"
+                        @bind-Text="_selectedText"
+                        AllowAdd="true"
+                        AddNewClicked="OnAddNewClicked"></BbComboBox>
+
+
+        </div>
+
+        <div class="col-sm-6">
+
+            <p>@_addNewResult</p>
+
+        </div>
+
+
+    </div>
+
+<div class="row">
+
+    <div class="col-sm-6">
+
+        <div style="height:300px; overflow-y:auto">
+            <table @ref=_tableElementReference class="table table-bordered table-hover">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Period</th>
+                        <th>Product</th>
+                        <th>Quantity</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var row in _orderTable)
+                    {
+                        <tr>
+                            <td>@(_orderTable.IndexOf(row)+1)</td>
+                            <td>
+                                <BbDatePicker DropdownPosition="DropdownPositions.Fixed"
+                                              Size="BootstrapElementSizes.Sm"
+                                              @bind-Value="@row.Period"></BbDatePicker>
+                            </td>
+                            <td>
+                                <BbComboBox TValue="int"
+                                            DropdownPosition="DropdownPositions.Fixed"
+                                            DropdownWidth="150"
+                                            ItemsSource="_products"
+                                            TextName="Title"
+                                            ValueName="Id"
+                                            AllowAdd="true"
+                                            Size="BootstrapElementSizes.Sm"
+                                            IsDeletedName="IsDeleted"
+                                            @bind-Value="@row.ProductId"></BbComboBox>
+                            </td>
+                            <td><BbNumberInput TValue="decimal" @bind-Value="@row.Amount"></BbNumberInput></td>
+                        </tr>
+                    }
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="col-sm-6">
+
+        <button class="btn btn-sm btn-outline-dark" @onclick="OnTestClick">Test</button>
+
+    </div>
+</div>
+

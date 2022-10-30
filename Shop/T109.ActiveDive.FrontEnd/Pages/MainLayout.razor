@@ -1,0 +1,31 @@
+﻿@using T104.Store.FrontEnd.BlazorWASM.Shared
+@using T104.Store.FrontEnd.BlazorWASM.Components.Search
+@inherits LayoutComponentBase
+
+<div class="page">
+
+    <div class="topbar">
+        <TopNavMenu />
+    </div>
+
+    <div class="search">
+        <Search />
+    </div>
+
+    <div class="bottombar">
+        <BottomNavMenu />
+    </div>
+    
+    <div class="itemPath">
+        <b>Category \ category \ item </b>
+    </div>
+
+    <div class="container">
+        @Body
+    </div>
+
+    <div class="footer">
+
+    </div>
+
+</div>

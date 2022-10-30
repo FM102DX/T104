@@ -1,0 +1,51 @@
+﻿@page "/fetchdata"
+
+<div class="row">
+
+    <div class="col-sm-6">
+
+        <div class="btn-group btn-group-sm">
+
+            <button class="btn btn-outline-success" @onclick="OnAlertSucessAddClick">Alert success</button>
+            <button class="btn btn-outline-danger" @onclick="OnAlertDangerAddClick">Alert danger</button>
+
+            <button class="btn btn-outline-info" @onclick="OnAlertDismissableClick">Alert dismissable</button>
+
+
+        </div>
+
+    </div>
+
+</div>
+
+<div class="row" style="margin-top:20px;">
+
+    <div class="col-sm-6">
+
+        <div class="form-group form-row">
+            <label class="col-sm-4 col-form-label-sm">Confirm size</label>
+            <div class="col-sm-8">
+                <BbSelect TValue="BBComponents.Enums.BootstrapModalSizes"
+                          ItemsSource="_availableSizes"
+                          ValueName="Item1"
+                          TextName="Item2"
+                          @bind-Value="_size"
+                          HtmlClass="form-control  form-control-sm"></BbSelect>
+            </div>
+        </div>
+
+        <span>@_size</span>
+
+        <button class="btn btn-success" @onclick="OnConfirmShowClick">Show confirm</button>
+
+
+    </div>
+
+</div>
+
+<BbAlertHub></BbAlertHub>
+
+@if (_isConfirmOpen)
+{
+    <BbConfirm Text="Do agree with... ?" OnClose="OnConfirmClose" Size="_size"></BbConfirm>
+}

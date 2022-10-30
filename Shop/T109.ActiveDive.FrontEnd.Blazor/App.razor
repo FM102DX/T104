@@ -1,0 +1,10 @@
+﻿<Router AppAssembly="@typeof(Program).Assembly" PreferExactMatches="@true">
+    <Found Context="routeData">
+        <RouteView RouteData="@routeData" DefaultLayout="@typeof(T109.ActiveDive.FrontEnd.Blazor.Pages.MainLayout)" />
+    </Found>
+    <NotFound>
+        <LayoutView Layout="@typeof(T109.ActiveDive.FrontEnd.Blazor.Pages.MainLayout)">
+            <p>Sorry, there's nothing at this address.</p>
+        </LayoutView>
+    </NotFound>
+</Router>

@@ -1,0 +1,54 @@
+﻿
+@using T109.ActiveDive.FrontEnd.Blazor.Components
+@using T109.ActiveDive.FrontEnd.Blazor.Components.ShopItemCollection
+
+<div class="SkuDivision">
+
+    @{
+        int counter = 1;
+        int step = 3;
+        int totalCount = @ItemsNo.Count;
+        int stepCount= 0;
+        //@UsageCase== ShopItemCollectionUsageCaseEnum.MainPageAppearamce
+        // || @UsageCase== ShopItemCollectionUsageCaseEnum.MainBarSearch
+    }
+
+    @if (true)
+    {
+        
+        <div class="goodsRowBegin skuUnitBase" />
+        @foreach(var sku in @ItemsNo)
+        {
+            @if (stepCount==step)
+            {
+                <div class="goodsRowEnd skuUnitBase" /><div class="goodsRowBegin skuUnitBase" />
+                stepCount = 0;
+            }
+        
+            <div class="SkuCard skuUnitBase" id="@counter">
+
+                <div class="SkuCard-image SkuCard-element">
+                    <img class="SkuCardPic" src="@sku.FirstPic" />
+                </div>
+
+                <div class="SkuCard-productName SkuCard-element">
+                    <a href="@ItemManager.GetItemPageFullAddress(@sku.Id)">
+                       @sku.Alias
+                   </a>
+                </div>
+
+                <div class="SkuCard-productPrice SkuCard-element">
+                    @sku.Alias
+                 </div>
+
+            </div>
+
+            counter++;
+
+            stepCount++;
+
+        }
+    }
+
+
+</div>

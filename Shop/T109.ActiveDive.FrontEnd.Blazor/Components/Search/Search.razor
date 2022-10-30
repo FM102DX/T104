@@ -1,0 +1,18 @@
+﻿<div class="SearchBarContainerLeftRight">
+
+</div>
+
+<div class="SearchBarContainer">
+
+    <div id="SearchControl">
+        <a href=""><div id="ClickableShopLabel" class="SearchControlElement"></div></a>
+            <div id="SearchInputBoxElementGroup">
+                <input placeholder="Искать в этом магазине" type="text" @onkeydown="@Enter" autocapitalize="off" autocomplete="off" autocorrect="off" spellcheck="false" maxlength="255" id="MainSearchField" @bind-value="@Value" class="SearchControlElement"> 
+                <button id="MainSearchButton" class="SearchControlElement" @onclick="@(e => SearchClicked())">Search</button>
+            </div>
+    </div>
+</div>
+
+<div class="SearchBarContainerLeftRight">
+
+</div>
