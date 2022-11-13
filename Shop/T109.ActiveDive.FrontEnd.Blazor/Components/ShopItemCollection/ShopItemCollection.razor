@@ -13,8 +13,17 @@
         // || @UsageCase== ShopItemCollectionUsageCaseEnum.MainBarSearch
     }
 
-    @if (true)
+    @if (@UsageCase == ShopItemCollectionUsageCaseEnum.MainPageAppearamce)
     {
+        if (@Count == 0) { <span>No items here </span>}
+    }
+    else
+    {
+        if (@Count == 0)
+        {
+            <span>No items found </span>
+        }
+    }
         
         <div class="goodsRowBegin skuUnitBase" />
         @foreach(var sku in @ItemsNo)
@@ -32,13 +41,13 @@
                 </div>
 
                 <div class="SkuCard-productName SkuCard-element">
-                    <a href="@ItemManager.GetItemPageFullAddress(@sku.Id)">
-                       @sku.Alias
+                    <a href="@Manager.GetItemPageFullAddress(@sku.Id)">
+                       @sku.Name
                    </a>
                 </div>
 
                 <div class="SkuCard-productPrice SkuCard-element">
-                    @sku.Alias
+                    
                  </div>
 
             </div>
@@ -48,7 +57,6 @@
             stepCount++;
 
         }
-    }
 
 
 </div>

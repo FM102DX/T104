@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Components;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using System;
 
 
 namespace T109.ActiveDive.FrontEnd.Blazor.Data
@@ -7,13 +9,16 @@ namespace T109.ActiveDive.FrontEnd.Blazor.Data
     {
         //Класс который инкапсулирует управление магазином целиком
 
-        public string StoreBaseUrl { get; }
+        public string StoreBaseUrl { get; set; }
 
-        public StoreManager()  {  }
-
-        public StoreManager(string storeBaseUrl)
+        public StoreManager(NavigationManager Navi)
         {
-            StoreBaseUrl=storeBaseUrl;
+            
+            StoreBaseUrl = Navi.BaseUri;
+        }
+        public string GetItemPageFullAddress(Guid itemId)
+        {
+            return $"{StoreBaseUrl}Item/" + itemId.ToString();
         }
 
     }

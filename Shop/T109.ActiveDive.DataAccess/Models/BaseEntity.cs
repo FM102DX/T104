@@ -11,7 +11,6 @@ namespace T109.ActiveDive.DataAccess.Models
         {
             Id = System.Guid.NewGuid();
             CreatedDateTime = DateTime.Now;
-           // SysMessage = "Message101";
         }
 
         public BaseEntity(Guid id, DateTime createdDateTime, DateTime lastModifiedDateTime)

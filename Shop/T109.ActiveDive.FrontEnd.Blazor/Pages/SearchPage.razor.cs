@@ -12,12 +12,13 @@ namespace T109.ActiveDive.FrontEnd.Blazor.Pages
         public Serilog.ILogger Logger { get; set; }
 
         [Parameter]
-        public string searchText { get; set; }
+        public string SearchText { get; set; }
 
         public ShopItemCollectionUsageCaseEnum UsageCase { get; set; } = ShopItemCollectionUsageCaseEnum.MainBarSearch;
 
         protected override async Task OnInitializedAsync()
         {
+
         }
     }
 }

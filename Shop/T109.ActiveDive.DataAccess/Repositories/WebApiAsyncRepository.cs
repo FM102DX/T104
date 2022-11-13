@@ -23,184 +23,162 @@ namespace T109.ActiveDive.DataAccess.DataAccess
 
         private HttpClient httpClient;
 
-        string _prefix;
-
-        public string Alias { get; set; } = "WebApiAsyncRepositoryAlias";
-
-        public HttpClient MyHttpClient
-        {
-                get { return httpClient; }
-                set { httpClient = value; }
-        }
+        private string countHostPath;
+        private string getAllHostPath;
+        private string insertHostPath;
+        private string updateHostPath;
+        private string deleteHostPath;
+        private string searchHostPath;
+        private string getByIdOrNullHostPath;
 
         public Serilog.ILogger Logger;
 
-        public WebApiAsyncRepository<T> SetLogger (Serilog.ILogger logger)
+        public WebApiAsyncRepository<T> SetCountHostPath(string text)
         {
-            Logger= logger;
+            countHostPath = text;
+            return this;
+        }
+        public WebApiAsyncRepository<T> SetGetAllHostPath(string text)
+        {
+            getAllHostPath = text;
+            return this;
+        }
+        public WebApiAsyncRepository<T> SetInsertHostPath(string text)
+        {
+            insertHostPath = text;
+            return this;
+        }
+        public WebApiAsyncRepository<T> SetUpdateHostPath(string text)
+        {
+            updateHostPath = text;
+            return this;
+        }
+        public WebApiAsyncRepository<T> SetDeleteHostPath(string text)
+        {
+            deleteHostPath = text;
             return this;
         }
 
-        public WebApiAsyncRepository(string prefix = "")
+        public WebApiAsyncRepository<T> SetSearchHostPath(string text)
         {
-            _prefix = prefix;
+            searchHostPath = text;
+            return this;
         }
-        public WebApiAsyncRepository(string baseAddress, string prefix="")
+        public WebApiAsyncRepository<T> SetGetByIdOrNullHostPath(string text)
         {
-            _prefix= prefix;
-             httpClient = new System.Net.Http.HttpClient(new HttpClientHandler());
+            getByIdOrNullHostPath = text;
+            return this;
+        }
+        public WebApiAsyncRepository<T> SetBaseAddress(string baseAddress)
+        {
             httpClient.BaseAddress = new Uri(baseAddress);
+            return this;
+        }
+
+        public WebApiAsyncRepository(Serilog.ILogger logger)
+        {
+            httpClient = new System.Net.Http.HttpClient(new HttpClientHandler());
             httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+            Logger = logger;
         }
 
-        public WebApiAsyncRepository(HttpClient httpClient, string prefix="")
+        public async Task<int> GetCountAsync()
         {
-            _prefix = prefix;
-            this.httpClient = httpClient;
-        }
-
-        public Task<int> Count
-        {
-            get
+            int rez = -1;
+            try
             {
-                int rez;
-                try
+                var response = await httpClient.GetAsync($"{countHostPath}");
+                var json = response.Content.ReadAsStringAsync().Result;
+                switch (response.StatusCode)
                 {
-                    Task<HttpResponseMessage> response;
-                    string json;
-                    response = httpClient.GetAsync($"{_prefix}/Count/");
+                    case System.Net.HttpStatusCode.OK:
 
-                    //тут возвращается not found 404
-                    switch (response.Result.StatusCode)
-                    {
-                        case System.Net.HttpStatusCode.OK:
-                            json = response.Result.Content.ReadAsStringAsync().Result;
-                            rez = JsonConvert.DeserializeObject<int>(json);
-                            break;
-                        case System.Net.HttpStatusCode.NotFound:
-                        default:
-                            rez = -1;
-                            break;
-                    }
+                        rez = JsonConvert.DeserializeObject<int>(json);
+                        break;
+                    default:
+                        throw new Exception();
                 }
-                catch (Exception ex)
-                {
-                    rez = -1;
-                }
-                return Task.FromResult(rez);
             }
+            catch (Exception ex)
+            {
+                Logger.Error(ex.Message);
+            }
+            return rez;
         }
 
         public async Task<IEnumerable<T>> Search(string searchText)
         {
-            IEnumerable<T> items;
+            IEnumerable<T> items =  new List<T>();
             try
             {
-                // Logger.Information($"Sending request to {httpClient.BaseAddress}{_prefix}/getall/, httpClient=null: {httpClient == null} prefix={_prefix} ");
+                Logger.Information($"This is WebApiAsyncRepository.search searchText={searchText}");
+                
+                Logger.Information($"Sending reqyest to {httpClient.BaseAddress}");
 
-                var response = await httpClient.GetAsync($"{_prefix}/search/"+ searchText);
+                var response = await httpClient.GetAsync($"{searchHostPath}/{searchText}");
+                
+                var json = await response.Content.ReadAsStringAsync();
 
-                // Logger.Information($"Got responce success={response.IsSuccessStatusCode} StatusCode={response.StatusCode}");
+                Logger.Information($"Received json {json}");
 
-                var responseContent = await response.Content.ReadAsStringAsync();
-
-                items = JsonConvert.DeserializeObject<IEnumerable<T>>(responseContent);
-
-                foreach (var x in items)
+                switch (response.StatusCode)
                 {
-                  //  Logger.Information($"x={x.ShortString()}");
+                    case System.Net.HttpStatusCode.OK:
+                        items = JsonConvert.DeserializeObject<IEnumerable<T>>(json);
+                        break;
+                    default:
+                        throw new Exception();
                 }
             }
             catch (Exception ex)
             {
-             //   Logger.Information($"ERROR={ex.Message}");
-                items = (IEnumerable<T>)new List<T>();
+                Logger.Error($"ERROR: in WebApiAsyncRepository.search {ex.Message}");
             }
             return items;
-        }
-
-        public async Task<List<T>> SearchList(string searchText)
-        {
-            List<T> rez = new List<T>();
-
-            //Console.WriteLine($"Barsik is talkin mieowwww 1!");
-            try
-            {
-                IEnumerable<T> list = await Search(searchText);
-
-                foreach (T t in list)
-                {
-                    rez.Add(t);
-                }
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"{ex.Message}");
-            }
-            return rez;
         }
 
 
         public async Task<IEnumerable<T>> GetAllAsync()
         {
-            IEnumerable<T> items;
+            IEnumerable<T> items = new List<T>();
             try
             {
-                Logger.Information($"Sending request to {httpClient.BaseAddress}{_prefix}/getall/, httpClient=null: {httpClient == null} prefix={_prefix} ");
-
-                var response = await httpClient.GetAsync($"{_prefix}/getall/");
-
-                Logger.Information($"Got responce success={response.IsSuccessStatusCode} StatusCode={response.StatusCode}");
-
-                var responseContent = await response.Content.ReadAsStringAsync();
-
-                items = JsonConvert.DeserializeObject<IEnumerable<T>>(responseContent);
-
-                foreach (var x in items)
-                {
-                    Logger.Information($"x={x.ShortString()}");
-                }
-            }
-            catch (Exception ex)
-            {
-                Logger.Information($"ERROR={ex.Message}");
-                items = (IEnumerable<T>)new List<T>();
-            }
-            return items;
-        }
-
-        public async Task<T> GetByIdOrNullAsync(Guid id)
-        {
-            T item;
-            
-            try
-            {
-               string json;
-
-               var response = await httpClient.GetAsync($"{_prefix}/GetByIdOrNull/{id}");
-
-                //тут возвращается not found 404
+                var response = await httpClient.GetAsync($"{getAllHostPath}");
+                var json = await response.Content.ReadAsStringAsync();
                 switch (response.StatusCode)
                 {
                     case System.Net.HttpStatusCode.OK:
-                        json = response.Content.ReadAsStringAsync().Result;
-                        item = JsonConvert.DeserializeObject<T>(json);
+                        items = JsonConvert.DeserializeObject<IEnumerable<T>>(json);
                         break;
-
-                    case System.Net.HttpStatusCode.NotFound:
-                        item=null;
-                        break;
-
                     default:
-                        item = null;
-                        break;
-
+                        throw new Exception();
                 }
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"WebApiRepository error: {ex.Message}");
-                item = null;
+                Logger.Error(ex.Message);
+            }
+            return items;
+        }
+        public async Task<T> GetByIdOrNullAsync(Guid id)
+        {
+            T item = null;
+            try
+            {
+                var response = await httpClient.GetAsync($"{getByIdOrNullHostPath}");
+                var json = await response.Content.ReadAsStringAsync();
+                switch (response.StatusCode)
+                {
+                    case System.Net.HttpStatusCode.OK:
+                        item = JsonConvert.DeserializeObject<T>(json);
+                        break;
+                    default:
+                        throw new Exception();
+                }
+            }
+            catch (Exception ex)
+            {
+                Logger.Error(ex.Message);
             }
             return item;
         }
@@ -208,7 +186,7 @@ namespace T109.ActiveDive.DataAccess.DataAccess
         public async Task<bool> Exists(Guid id)
         {
             var rez = await GetByIdOrNullAsync(id);
-            return  rez!= null;
+            return rez != null;
         }
 
         public async Task<CommonOperationResult> AddAsync(T t)
@@ -224,27 +202,26 @@ namespace T109.ActiveDive.DataAccess.DataAccess
 
                 jsonContent = new StringContent(json, Encoding.UTF8, "application/json");
 
-               var response = await httpClient.PostAsync($"{_prefix}/", jsonContent);
+                var response = await httpClient.PostAsync($"{insertHostPath}", jsonContent);
 
                 switch (response.StatusCode)
                 {
-                    default:
+
                     case System.Net.HttpStatusCode.OK:
-                        rez = CommonOperationResult.sayOk(response.Content.ReadAsStringAsync().Result);
+                        rez = CommonOperationResult.SayOk(response.Content.ReadAsStringAsync().Result);
                         break;
 
-                    case System.Net.HttpStatusCode.Conflict:
-                        rez = CommonOperationResult.sayFail(response.Content.ReadAsStringAsync().Result);
-                        break;
+                    default:
+                        throw new Exception();
+
                 }
             }
             catch (Exception ex)
             {
-                rez = CommonOperationResult.sayFail($"WebApiRepository error: {ex.Message}");
+                rez = CommonOperationResult.SayFail($"WebApiRepository caught an exception: {ex.Message}");
             }
             return rez;
         }
-
 
         public async Task<CommonOperationResult> UpdateAsync(T t)
         {
@@ -258,29 +235,23 @@ namespace T109.ActiveDive.DataAccess.DataAccess
                 json = JsonConvert.SerializeObject(t, Formatting.Indented,
                         new JsonSerializerSettings { ContractResolver = new CamelCasePropertyNamesContractResolver() });
 
-                Logger.Information($"json={json}");
-
                 jsonContent = new StringContent(json, Encoding.UTF8, "application/json");
 
-              //  Logger.Information($"jsonContent={string.Join(',', jsonContent.Headers)}");
-
-                var response = await httpClient.PutAsync($"{_prefix}/", jsonContent);
+                var response = await httpClient.PutAsync($"{updateHostPath}", jsonContent);
 
                 switch (response.StatusCode)
                 {
-                    default:
-                    case System.Net.HttpStatusCode.OK:
-                        rez = CommonOperationResult.sayOk(response.Content.ReadAsStringAsync().Result);
-                        break;
 
-                    case System.Net.HttpStatusCode.Conflict:
-                        rez = CommonOperationResult.sayFail(response.Content.ReadAsStringAsync().Result);
+                    case System.Net.HttpStatusCode.OK:
+                        rez = CommonOperationResult.SayOk(response.Content.ReadAsStringAsync().Result);
                         break;
+                    default:
+                        throw new Exception();
                 }
             }
             catch (Exception ex)
             {
-                rez = CommonOperationResult.sayFail($"WebApiRepository error: {ex.Message}");
+                rez = CommonOperationResult.SayFail($"{ex.Message}");
             }
             return rez;
         }
@@ -290,54 +261,29 @@ namespace T109.ActiveDive.DataAccess.DataAccess
 
             CommonOperationResult rez;
             try
-                {
-                   var response = await httpClient.DeleteAsync($"{_prefix}/{id}");
+            {
+                var response = await httpClient.DeleteAsync($"{deleteHostPath}/{id}");
 
                 switch (response.StatusCode)
                 {
-                    default:
                     case System.Net.HttpStatusCode.OK:
-                        rez = CommonOperationResult.sayOk(response.Content.ReadAsStringAsync().Result);
+                        rez = CommonOperationResult.SayOk(response.Content.ReadAsStringAsync().Result);
                         break;
-
-                    case System.Net.HttpStatusCode.Conflict:
-                        rez = CommonOperationResult.sayFail(response.Content.ReadAsStringAsync().Result);
-                        break;
+                    default:
+                        throw new Exception();
                 }
             }
             catch (Exception ex)
             {
-                rez = CommonOperationResult.sayFail($"WebApiRepository error: {ex.Message}");
+                rez = CommonOperationResult.SayFail($"{ex.Message}");
             }
             return rez;
 
         }
 
-        public async Task<List<T>> GetItemsListAsync()
+        public async Task<CommonOperationResult> InitAsync(bool deleteDb)
         {
-            List<T> rez = new List<T>();
-
-            //Console.WriteLine($"Barsik is talkin mieowwww 1!");
-            try
-            {
-                IEnumerable<T> list = await GetAllAsync();
-
-                foreach (T t in list)
-                {
-                    rez.Add(t);
-                }
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine( $"{ex.Message}");
-            }
-            return rez;
-        }
-
-        public Task<CommonOperationResult> InitAsync(bool deleteDb)
-        {
-            CommonOperationResult rez = CommonOperationResult.sayOk();
-            return Task.FromResult(rez);
+            return await Task.FromResult(CommonOperationResult.SayOk());
         }
     }
 }

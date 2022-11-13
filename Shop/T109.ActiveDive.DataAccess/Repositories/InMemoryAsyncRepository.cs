@@ -37,14 +37,6 @@ namespace T109.ActiveDive.DataAccess.DataAccess
 
         }
 
-        public Task<int> Count
-        {
-            get 
-            {
-                return Task.FromResult(Data.Count);
-            }
-        }
-
         public Task<bool> Exists(Guid id)
         {
             return Task.FromResult(GetByIdOrNullAsync(id).Result != null); 
@@ -53,7 +45,7 @@ namespace T109.ActiveDive.DataAccess.DataAccess
         public Task<CommonOperationResult> AddAsync(T t)
         {
             Data.Add(t);
-            return Task.FromResult(CommonOperationResult.sayOk());
+            return Task.FromResult(CommonOperationResult.SayOk());
         }
 
         public Task<CommonOperationResult> UpdateAsync(T t)
@@ -61,12 +53,12 @@ namespace T109.ActiveDive.DataAccess.DataAccess
             var i = Data.IndexOf(t);
             if (i == -1)
             {
-                return Task.FromResult(CommonOperationResult.sayFail());
+                return Task.FromResult(CommonOperationResult.SayFail());
             }
             else
             {
                 Data[i]=t;
-                return Task.FromResult(CommonOperationResult.sayOk());
+                return Task.FromResult(CommonOperationResult.SayOk());
             }
         }
 
@@ -75,24 +67,25 @@ namespace T109.ActiveDive.DataAccess.DataAccess
             T t = GetByIdOrNullAsync(id).Result;
             if (t==null)
             {
-                return Task.FromResult(CommonOperationResult.sayFail());
+                return Task.FromResult(CommonOperationResult.SayFail());
             }
             else
             {
                 Data.Remove(t);
-                return Task.FromResult(CommonOperationResult.sayOk());
+                return Task.FromResult(CommonOperationResult.SayOk());
             }
         }
 
         public Task<CommonOperationResult> InitAsync(bool deleteDb = false)
         {
             Data.Clear();
-            return Task.FromResult(CommonOperationResult.sayOk());
+            return Task.FromResult(CommonOperationResult.SayOk());
         }
 
-        Task<List<T>> IAsyncRepository<T>.GetItemsListAsync()
+
+        public Task<int> GetCountAsync()
         {
-            return Task.FromResult(Data);
+            return Task.FromResult(Data.Count);
         }
     }
 }

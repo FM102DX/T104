@@ -1,6 +1,9 @@
 ﻿
 
-.LeftAligned{
+
+/* ***************   CORE MODEL  **************** */
+
+.LeftAligned {
     text-align: left;
 }
 
@@ -17,7 +20,9 @@ html, body {
     background-repeat: repeat;
 }
 
-div{ display:block;}
+div {
+    display: block;
+}
 
     div.page {
         position: relative;
@@ -30,114 +35,57 @@ div{ display:block;}
         padding-top: 0px;
         text-size-adjust: 100%;
         text-transform: none;
-        
     }
 
-div.topbar {
-    height: 30px;
-    background-color: burlywood;
-    padding-top: 5px;
-}
-div.topSpace {
+    div.topbar {
+        height: 30px;
+        background-color: burlywood;
+        padding-top: 5px;
+    }
+
+    div.topSpace {
         height: 45px;
-        width:100%;
-    }
-div.SkuDivision {
-    min-height: 1450px;
-    margin-top: 30px;
-}
-
-div.search {
-    
-    margin-bottom: 0px;
-    margin-left: 0px;
-    margin-right: 0px;
-    margin-top: 00px;
-    height:70px;
-}
-div.SearchBarContainer {
-    padding-top: 0px;
-    display: block;
-    float: left;
-    width: 80%;
-    margin: 0 auto;
-    height: 70px;
-}
-
-div.SearchBarContainerLeftRight {
-    float: left;
-    height: 70px;
-    width: 10%;
-    float: left;
-}
-
-    div#ClickableShopLabel {
-        margin-right: 30px;
-        margin-left: 35px;
-        width: 130px;
-        height: 70px;
-        border: 0px;
-        padding-top: 0px;
-        background-image: url("img/site-logo2.jpg");
-        background-position: left top;
-        background-size: 110px;
-        background-repeat: no-repeat;
-        background-position-y: top;
+        width: 100%;
     }
 
-    div#SearchInputBoxElementGroup {
-        padding-top: 0px;
-        width: 925px;
-        height: 70px;
+    div.SkuDivision {
+        min-height: 1450px;
+        margin-top: 30px;
     }
 
-    div.SkuName {
-        float: left;
-        clear: both;
-        font-size: 25px;
-        line-height: 35px;
-        padding-top: 20px;
-        margin-top: 25px;
-        margin-bottom: 15px;
-        padding-left: 10px;
+    div.bottombar {
+        height: 30px;
+        background-color: greenyellow;
+        padding-top: 5px;
     }
 
-div.SkuNameSep {
-        float: left;
-        clear: both;
-    }
-
-div.bottombar {
-    height: 30px;
-    background-color: greenyellow;
-    padding-top: 5px;
-}
-
-div.itemPath {
+    div.itemPath {
         height: 40px;
         background-color: white;
         padding-top: 5px;
         padding-left: 10px;
-}
+    }
 
-div.container {
+    div.container {
         min-height: 1350px;
-}
+    }
 
-div.footer {
 
-}
+
+    div.footer {
+    }
+
     div.footerVisible {
         width: 900px;
         height: 100px;
         border-top-right-radius: 15px;
         border-top-left-radius: 15px;
         background-image: url("img/background/bgblue.jpg");
-        margin:auto;
-        color:white;
-        text-align:center;
-        vertical-align:text-top;
-        padding-top:40px;
+        margin: auto;
+        color: white;
+        text-align: center;
+        vertical-align: text-top;
+        padding-top: 40px;
     }
 
 
@@ -148,60 +96,179 @@ div.footer {
         margin: 0px 10px 0px 10px;
     }
 
-div.TopBarElement {
-    display: block;
-    float: left;
-}
+    div.TopBarElement {
+        display: block;
+        float: left;
+    }
 
 img.SiteLogo {
     height: 37px;
 }
 
-.SearchControlElement {
-    float: left;
-    
+div.search {
+    margin-bottom: 0px;
+    margin-left: 0px;
+    margin-right: 0px;
+    margin-top: 00px;
+    height: 70px;
 }
 
+
+
+/********************SEARCH *****************************/
+
+
+
+
+
+div.SearchBar {
+    padding-top: 0px;
+    display: block;
+    float: left;
+    width: 80%;
+    margin: 0 auto;
+    height: 70px;
+}
+
+div.SearchBarLeftRight {
+    float: left;
+    height: 70px;
+    width: 10%;
+    float: left;
+}
+
+div.SearchBarElement {
+    float: left;
+}
+
+div#ClickableShopLabel {
+    margin-right: 30px;
+    margin-left: 35px;
+    width: 130px;
+    height: 70px;
+    border: 0px;
+    padding-top: 0px;
+    background-image: url("img/site-logo2.jpg");
+    background-position: left top;
+    background-size: 110px;
+    background-repeat: no-repeat;
+    background-position-y: top;
+}
+
+.SearchFieldBg {
+    background-color: white;
+}
+
+div.SearchInputBoxElementGroup {
+    padding-top: 0px;
+    width: 500px;
+    height: 70px;
+}
+
+div.SearchButtonElementGroup {
+    padding-top: 0px;
+    width: 200px;
+    height: 70px;
+}
+
+
 input#MainSearchField {
-    width: 650px;
-    height: 49px;
-    margin-right: 0px;
-    -webkit-border-radius: 6px;
-    -moz-border-radius: 6px;
-    border-radius: 6px;
-    border: 2px solid;
-    border-color: lightgrey;
+    width: 100%;
+    height: 100%;
+    border: none;
     font-size: 14pt;
     padding-left: 15px;
-    float: left;
-    margin-top: 3px;
-    margin-right: -3px;
     color: lightgray;
     outline: none;
 }
-    input#MainSearchField::-webkit-input-placeholder {
-        color: lightgray;
-    }
-    input#MainSearchField::-moz-placeholder {
-        color: lightgray;
-    }
-    input#MainSearchField:focus {
-        color: slategray;
-        border-color: lightgrey;
-    }
+
+div#CloseCross {
+    width: 40px;
+    height: 45px;
+    border: none;
+    background-color: white;
+    
+}
+
+div.CloseCrossWithImage {
+    background-image: url("img/SearchCloseCross.jpg");
+    background-repeat: no-repeat;
+    background-position: center;
+    cursor:pointer;
+}
+.CursorTest {
+    width: 50px;
+    height: 50px;
+    cursor: pointer;
+    background-color:red;
+}
+
+div.CloseCrossWithNoImage {
+}
 
 
+div.SearchFieldAndCrossWrap {
+    width: 100%;
+    height: 50px;
+    -webkit-border-bottom-left-radius: 6px;
+    -webkit-border-top-left-radius: 6px;
+    -moz-border-radius-bottomleft: 6px;
+    -moz-border-radius-topleft: 6px;
+    border-bottom-left-radius: 6px;
+    border-top-left-radius: 6px;
+    border: 2px solid;
+    border-color: lightgrey;
+    padding-left: 15px;
+}
 
+div.SearchFieldWrap {
+    width: 440px;
+    height: 100%;
+}
+
+.SearchFieldAndCrossWrap::-webkit-input-placeholder {
+    color: lightgray;
+}
+
+.SearchFieldAndCrossWrap::-moz-placeholder {
+    color: lightgray;
+}
+
+.SearchFieldAndCrossWrap:focus {
+    color: slategray;
+    border-color: lightgrey;
+}
 
 button#MainSearchButton {
     width: 80px;
-    height: 49px;
-    margin-top: 3px;
+    height: 50px;
     border: 2px solid;
     border-color: lightgrey;
     border-top-right-radius: 6px;
     border-bottom-right-radius: 6px;
 }
+
+
+
+
+/*  ***********  SHOP ITEM PAGE ***************/
+
+div.SkuName {
+    float: left;
+    clear: both;
+    font-size: 25px;
+    line-height: 35px;
+    padding-top: 20px;
+    margin-top: 25px;
+    margin-bottom: 15px;
+    padding-left: 10px;
+}
+
+div.SkuNameSep {
+    float: left;
+    clear: both;
+}
+
 
 div.skuUnitBase {
     margin-top: 20px;
@@ -228,7 +295,7 @@ div.goodsRowBegin {
     width: 70px;
     position: relative;
     float: left;
-    clear:left;
+    clear: left;
 }
 
 div.goodsRowEnd {
@@ -247,14 +314,14 @@ div.SkuCard-element {
     width: 240px;
     margin-left: 20px;
     position: relative;
-    float:left;
-    clear:both;
+    float: left;
+    clear: both;
 }
 
 div.SkuCard-image {
     height: 265px;
     width: 240px;
-    overflow:hidden;
+    overflow: hidden;
 }
 
 div.SkuCard-productName {
@@ -272,8 +339,7 @@ div.SkuCard-productPrice {
     margin-bottom: 7px;
 }
 
-div.SkuDetailPage{
-
+div.SkuDetailPage {
 }
 
 div.SkuDetailPagePart {
@@ -294,7 +360,7 @@ div.MiniImageHolder {
 div.BigImageHolder {
     width: 400px;
     height: 400px;
-    text-align:center;
+    text-align: center;
     padding-top: 17px;
     padding-left: 0px;
 }
@@ -338,9 +404,3 @@ div.SkuDetailPageSmallPicSelected {
     border-width: 3px;
     border-color: grey;
 }
-
-
-
-
-
-

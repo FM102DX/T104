@@ -7,17 +7,14 @@ namespace T109.ActiveDive.FrontEnd.Blazor.Pages
 {
     public partial class Index : ComponentBase
     {
-
-
         [Inject]
         public Serilog.ILogger Logger { get; set; }
 
-        public ShopItemCollectionUsageCaseEnum UsageCase { get; set; }
+        public ShopItemCollectionUsageCaseEnum UsageCase { get=> ShopItemCollectionUsageCaseEnum.MainPageAppearamce; }
 
         protected override async Task OnInitializedAsync()
         {
             Logger.Information("index page opened");
-            //UsageCase = ShopItemCollectionUsageCaseEnum.MainPageAppearamce;
         }
     }
 }

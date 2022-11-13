@@ -24,7 +24,7 @@ namespace T109.ActiveDive.DataAccess
         public CommonOperationResult Add(T t)
         {
             Data.Add(t);
-            return CommonOperationResult.sayOk();
+            return CommonOperationResult.SayOk();
         }
 
         public CommonOperationResult Update(T t)
@@ -32,12 +32,12 @@ namespace T109.ActiveDive.DataAccess
             var i = Data.IndexOf(t);
             if (i == -1)
             {
-                return CommonOperationResult.sayFail();
+                return CommonOperationResult.SayFail();
             }
             else
             {
                 Data[i]=t;
-                return CommonOperationResult.sayOk();
+                return CommonOperationResult.SayOk();
             }
         }
 
@@ -46,19 +46,19 @@ namespace T109.ActiveDive.DataAccess
             T t = GetByIdOrNull(id);
             if (t==null)
             {
-                return CommonOperationResult.sayFail();
+                return CommonOperationResult.SayFail();
             }
             else
             {
                 Data.Remove(t);
-                return CommonOperationResult.sayOk();
+                return CommonOperationResult.SayOk();
             }
         }
 
         public CommonOperationResult Init(bool deleteDb = false)
         {
             Data.Clear();
-            return CommonOperationResult.sayOk();
+            return CommonOperationResult.SayOk();
         }
 
         public List<T> GetItemsList()

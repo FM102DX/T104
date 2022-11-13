@@ -6,7 +6,6 @@ using T109.ActiveDive.Core;
 namespace T109.ActiveDive.EventCatalogue.EventCatalogueApi
 {
     [ApiController]
-    // [Route("api/v1/DiveEventDemo")]
     [Route("api/eventdata")]
     public class EventDisplayController : Controller
     {
@@ -43,7 +42,8 @@ namespace T109.ActiveDive.EventCatalogue.EventCatalogueApi
         {
             return Manager.Search(searchText);
         }
-        
+
+        [HttpGet]
         [Route("GetByIdOrNull/{id}")]
         public ActiveDiveEvent GetByIdOrNull(Guid id)
         {

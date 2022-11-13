@@ -1,18 +1,22 @@
-﻿<div class="SearchBarContainerLeftRight">
-
+﻿<div class="SearchBarLeftRight">
 </div>
 
-<div class="SearchBarContainer">
+<div class="SearchBar">
+    <a href=""><div id="ClickableShopLabel" class="SearchBarElement"></div></a>
 
-    <div id="SearchControl">
-        <a href=""><div id="ClickableShopLabel" class="SearchControlElement"></div></a>
-            <div id="SearchInputBoxElementGroup">
-                <input placeholder="Искать в этом магазине" type="text" @onkeydown="@Enter" autocapitalize="off" autocomplete="off" autocorrect="off" spellcheck="false" maxlength="255" id="MainSearchField" @bind-value="@Value" class="SearchControlElement"> 
-                <button id="MainSearchButton" class="SearchControlElement" @onclick="@(e => SearchClicked())">Search</button>
+    <div class="SearchInputBoxElementGroup SearchBarElement">
+        <div class="SearchFieldAndCrossWrap SearchFieldBg">
+            <div class="SearchFieldWrap SearchBarElement">
+                <input class="SearchFieldBg" id="MainSearchField" placeholder="@DefaultSearchText" type="text" @onkeyup="@KeypressHandler" @onkeydown="@EnterHandler" autocapitalize="off" autocomplete="off" autocorrect="off" spellcheck="false" maxlength="255" @bind-value=Value @bind-value:event="oninput" />
             </div>
+            <div id="CloseCross" class="@SearchBarElementClass" @onclick="@(e => CloseCrossClicked())"></div>
+        </div>
+
+    </div>
+
+    <div class="SearchButtonElementGroup SearchBarElement">
+        <button id="MainSearchButton" class="" @onclick="@(e => SearchClicked())">Search</button>
     </div>
 </div>
-
-<div class="SearchBarContainerLeftRight">
-
+<div class="SearchBarLeftRight">
 </div>

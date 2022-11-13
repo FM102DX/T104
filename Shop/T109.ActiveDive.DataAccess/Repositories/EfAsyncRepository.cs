@@ -20,8 +20,6 @@ namespace T109.ActiveDive.DataAccess
             _context = context;
         }
 
-        public Task<int> Count => Task.FromResult(_context.Set<T>().Count());
-
         public Task<IEnumerable<T>> GetAllAsync()
         {
             try
@@ -54,11 +52,11 @@ namespace T109.ActiveDive.DataAccess
             {
                 _context.Set<T>().Add(t);
                 _context.SaveChanges();
-                return Task.FromResult(CommonOperationResult.sayOk());
+                return Task.FromResult(CommonOperationResult.SayOk());
             }
             catch (Exception ex)
             {
-                return Task.FromResult(CommonOperationResult.sayFail(ex.Message));
+                return Task.FromResult(CommonOperationResult.SayFail(ex.Message));
             }
         }
 
@@ -66,7 +64,7 @@ namespace T109.ActiveDive.DataAccess
         {
             _context.Set<T>().Update(t);
             var rez = _context.SaveChanges();
-            return Task.FromResult(CommonOperationResult.sayOk(rez.ToString()));
+            return Task.FromResult(CommonOperationResult.SayOk(rez.ToString()));
         }
 
         public Task<CommonOperationResult> DeleteAsync(Guid id)
@@ -74,11 +72,11 @@ namespace T109.ActiveDive.DataAccess
             T t = this.GetByIdOrNullAsync(id).Result;
             if (t == null)
             {
-                return Task.FromResult(CommonOperationResult.sayFail($"Id not found: {id}"));
+                return Task.FromResult(CommonOperationResult.SayFail($"Id not found: {id}"));
             }
             _context.Set<T>().Remove(t);
             var rez = _context.SaveChanges();
-            return Task.FromResult(CommonOperationResult.sayOk(rez.ToString()));
+            return Task.FromResult(CommonOperationResult.SayOk(rez.ToString()));
         }
 
         public Task<bool> Exists(Guid id)
@@ -91,7 +89,7 @@ namespace T109.ActiveDive.DataAccess
         {
             if (deleteDb) _context.Database.EnsureDeleted();
             _context.Database.EnsureCreated();
-            return Task.FromResult(CommonOperationResult.sayOk());
+            return Task.FromResult(CommonOperationResult.SayOk());
         }
 
         public Task<List<T>> GetItemsListAsync()
@@ -107,5 +105,9 @@ namespace T109.ActiveDive.DataAccess
             return Task.FromResult(rez);
         }
 
+        public Task<int> GetCountAsync()
+        {
+            return Task.FromResult(_context.Set<T>().Count());
+        }
     }
 }

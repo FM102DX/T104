@@ -1,7 +1,11 @@
 ﻿using Microsoft.AspNetCore.Components;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using T109.ActiveDive.Core;
+using T109.ActiveDive.FrontEnd.Blazor.Data;
+using T109.ActiveDive.Core;
+using T109.ActiveDive.DataAccess.DataAccess;
 using T109.ActiveDive.FrontEnd.Blazor.Data;
 
 namespace T109.ActiveDive.FrontEnd.Blazor.Components.ShopItemCollection
@@ -9,13 +13,16 @@ namespace T109.ActiveDive.FrontEnd.Blazor.Components.ShopItemCollection
     public partial class ShopItemCollection: ComponentBase
     {
         [Inject]
-        public ShopItemManager ItemManager { get; set; }
+        public StoreManager Manager { get; set; }
+
+        [Inject]
+        public WebApiAsyncRepository<ActiveDiveEvent> Repository { get; set; }
 
         [Inject]
         public Serilog.ILogger Logger { get; set; }
 
         [Inject]
-        ComponentHub MyComponentHub { get; set; }
+        ComponentHub CompHub { get; set; }
 
         [Parameter]
         public ShopItemCollectionUsageCaseEnum UsageCase { get; set; }
@@ -29,36 +36,44 @@ namespace T109.ActiveDive.FrontEnd.Blazor.Components.ShopItemCollection
 
         public int Count { get; set; }
 
+        protected override void OnInitialized()
+        {
+            CompHub.DoingSearch += CompHub_DoingSearch;
+        }
         protected override async Task OnInitializedAsync()
         {
-            MyComponentHub.DoingSearch += MyComponentHub_DoingSearch;
-            ItemsNo = await ItemManager.Repository.GetItemsListAsync();
-            Count = ItemsNo.Count;
-
-            Logger.Information($"IncomingItemsCount= {ItemsNo.Count}");
-            /*
-            if (UsageCase== ShopItemCollectionUsageCaseEnum.MainPageAppearamce)
-            {
-
-            }
-            else if (UsageCase == ShopItemCollectionUsageCaseEnum.MainBarSearch)
-            {
-
-            }
-            */
+             await DoPageLoad();
         }
 
-        private async void MyComponentHub_DoingSearch(string SearchText)
+        private async void CompHub_DoingSearch(string SearchText)
         {
-            Logger.Information("MainBarSearch: Searching " + SearchText);
+            Logger.Information("Searching from comphub with text: " + SearchText);
 
-            ItemsNo = await ItemManager.Repository.SearchList(SearchText);
+            ItemsNo = (await Repository.Search(SearchText)).ToList();
 
             Count = ItemsNo.Count;
 
             ItemsNo.ForEach(x => Logger.Information("MyTest " + x.Alias));
 
             StateHasChanged();
+        }
+
+        protected async Task DoPageLoad()
+        {
+            if (UsageCase == ShopItemCollectionUsageCaseEnum.MainPageAppearamce)
+            {
+                ItemsNo = (await Repository.GetAllAsync()).ToList();
+            }
+            else if (UsageCase == ShopItemCollectionUsageCaseEnum.MainBarSearch)
+            {
+                Logger.Information($"Doing search in ShopItemCollection with text = {SearchText}");
+                if (Repository == null) { Logger.Information("Repository is NULL"); } else Logger.Information("Repository is NOT NULL");
+                ItemsNo = (await Repository.Search(SearchText)).ToList();
+            }
+
+            Logger.Information($"This Shopitemcollection object, IncomingItemsCount= {ItemsNo.Count}");
+
+            Count = ItemsNo.Count;
         }
 
         public enum ShopItemCollectionUsageCaseEnum

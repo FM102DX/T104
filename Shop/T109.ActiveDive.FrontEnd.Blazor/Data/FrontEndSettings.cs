@@ -1,4 +1,6 @@
-﻿namespace T109.ActiveDive.FrontEnd.Blazor.Data
+﻿using System;
+
+namespace T109.ActiveDive.FrontEnd.Blazor.Data
 {
     public class FrontEndSettings
     {
@@ -9,6 +11,7 @@
         {
 
         }
+
         public FrontEndSettings(bool displayTopHorizontalMenu, bool displayMainHorizontalMenu, bool displayNavBar)
         {
             DisplayTopHorizontalMenu = displayTopHorizontalMenu;

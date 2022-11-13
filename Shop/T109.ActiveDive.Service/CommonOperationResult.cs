@@ -8,24 +8,21 @@ namespace T109.ActiveDive.Service
 {
     public class CommonOperationResult
     {
-        public bool success;
-        public string msg;
-        public object returningValue;
+        public bool Success { get; set; }
+        public string Msg { get; set; }
+        public object ReturningValue { get; set; }
 
-        public static CommonOperationResult getInstance(bool _success, string _msg, object _returningValue = null)
+        public static CommonOperationResult getInstance(bool success, string msg, object returningValue = null)
         {
             CommonOperationResult c = new CommonOperationResult();
-            c.success = _success;
-            c.msg = _msg;
-            c.returningValue = _returningValue;
+            c.Success = success;
+            c.Msg = msg;
+            c.ReturningValue = returningValue;
             return c;
         }
 
-        public static CommonOperationResult returnValue(object _returningValue = null) { return getInstance(true, "", _returningValue); }
-        public static CommonOperationResult sayFail(string _msg = "") { return getInstance(false, _msg, null); }
-        public static CommonOperationResult sayOk(string _msg = "") { return getInstance(true, _msg, null); }
-        public static CommonOperationResult sayItsNull(string _msg = "") { return getInstance(true, _msg, null); }
+        public static CommonOperationResult SayFail(string msg = "") { return getInstance(false, msg, null); }
+        public static CommonOperationResult SayOk(string msg = "") { return getInstance(true, msg, null); }
 
-        public string ShrotString() => $"Success: {success} message: {msg}";
     }
 }

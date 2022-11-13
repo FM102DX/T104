@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Components;
 using Selector = T109.ActiveDive.FrontEnd.Blazor.Components.ObjectSelector.ObjectSelector;
 using T109.ActiveDive.Core;
 using T109.ActiveDive.FrontEnd.Blazor.Data;
+using T109.ActiveDive.DataAccess.DataAccess;
 
 namespace T109.ActiveDive.FrontEnd.Blazor.Pages
           
@@ -13,7 +14,10 @@ namespace T109.ActiveDive.FrontEnd.Blazor.Pages
     {
 
         [Inject]
-        public ShopItemManager SkuManager { get; set; }
+        public StoreManager Manager { get; set; }
+
+        [Inject]
+        public WebApiAsyncRepository<ActiveDiveEvent> Repository { get; set; }
 
         [Inject]
         public Serilog.ILogger Logger { get; set; }
@@ -43,15 +47,16 @@ namespace T109.ActiveDive.FrontEnd.Blazor.Pages
         {
             try
             {
-                ActualItem = await SkuManager.Repository.GetByIdOrNullAsync(ItemId);
-                SkuManager.SetBaseAddress(Navigation.BaseUri);
+
+                ActualItem = await Repository.GetByIdOrNullAsync(ItemId);
                 //SetCurrentImage();
 
-                DisplayedObjects.Add(new Selector.SelectableObject(Selector.SelectableObject.SelectableObjectTypeEnum.Image) { Id = 0, Logger = this.Logger, FullPathToPicture = SkuManager.GetResourceFullAddress(ActualItem.FirstPic) }.SetSelectionSilently(true));
-                DisplayedObjects.Add(new Selector.SelectableObject(Selector.SelectableObject.SelectableObjectTypeEnum.Image) { Id = 1, Logger = this.Logger, FullPathToPicture = SkuManager.GetResourceFullAddress(ActualItem.SecondPic) }.SetSelectionSilently(true));
-                DisplayedObjects.Add(new Selector.SelectableObject(Selector.SelectableObject.SelectableObjectTypeEnum.Image) { Id = 2, Logger = this.Logger, FullPathToPicture = SkuManager.GetResourceFullAddress(ActualItem.ThirdPic) }.SetSelectionSilently(true));
+                // DisplayedObjects.Add(new Selector.SelectableObject(Selector.SelectableObject.SelectableObjectTypeEnum.Image) { Id = 0, Logger = this.Logger, FullPathToPicture = SkuManager.GetResourceFullAddress(ActualItem.FirstPic) }.SetSelectionSilently(true));
+                // DisplayedObjects.Add(new Selector.SelectableObject(Selector.SelectableObject.SelectableObjectTypeEnum.Image) { Id = 1, Logger = this.Logger, FullPathToPicture = SkuManager.GetResourceFullAddress(ActualItem.SecondPic) }.SetSelectionSilently(true));
+                // DisplayedObjects.Add(new Selector.SelectableObject(Selector.SelectableObject.SelectableObjectTypeEnum.Image) { Id = 2, Logger = this.Logger, FullPathToPicture = SkuManager.GetResourceFullAddress(ActualItem.ThirdPic) }.SetSelectionSilently(true));
 
                 SmallImgSelector.MySelectionChanged += SmallImgSelector_MySelectionChanged;
+
 
             }
             catch (Exception ex)

@@ -27,12 +27,14 @@ namespace T109.ActiveDive.EventCatalogue.EventCatalogueApi
 
         public IEnumerable<ActiveDiveEvent> Search(string SearchText)
         {
-            string[] words = SearchText.Trim().Split(' ');
+            string[] words = SearchText.ToLower().Trim().Split(' ');
+
             List<ActiveDiveEvent> rez = new List<ActiveDiveEvent> ();
             List<ActiveDiveEvent> tmp = new List<ActiveDiveEvent>();
 
             foreach (string word in words)
             {
+                
                 tmp = Repository.Data.Where(x => x.Alias.ToLower().Contains(word) |
                                                  x.Name.ToLower().Contains(word) |
                                                  x.Description.ToLower().Contains(word)).ToList();

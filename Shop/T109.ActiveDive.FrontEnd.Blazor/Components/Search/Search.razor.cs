@@ -14,36 +14,80 @@ namespace T109.ActiveDive.FrontEnd.Blazor.Components.Search
         public  StoreManager MyStoreManager { get; set; }
 
         [Inject]
-        NavigationManager MyNavigationManager { get; set; }
+        public NavigationManager Navi { get; set; }
 
         [Inject]
-        ComponentHub MyComponentHub { get; set; }
+        public ComponentHub CompHub { get; set; }
 
-        public string Value { get; set; }
+        [Inject]
+        public NavigationManager Nav { get; set; }
+
+        public string SearchBarElementClass { get; set; } = "SearchBarElement";
+        
+        public string DefaultSearchText { get; set; } = "Search here";
+
+        public bool FieldHasText { get; set; } = false;
+
+        public string Value { get; set; } = "";
+
+        public void SetSearchBarElementClass()
+        {
+            if (string.IsNullOrEmpty(Value.Trim()) | Value == DefaultSearchText) { SearchBarElementClass = "SearchBarElement"; } else { SearchBarElementClass = "SearchBarElement CloseCrossWithImage"; }
+            // StateHasChanged();
+        }
+        public void ResetSearchBarElementClass()
+        {
+             SearchBarElementClass = "SearchBarElement";
+        }
+
+        public void CloseCrossClicked()
+        {
+            Navi.NavigateTo(Navi.BaseUri);
+        }
+
+        public void KeypressHandler(KeyboardEventArgs e)
+        {
+            SetSearchBarElementClass();
+        }
 
         public void SearchClicked()
         {
-            ProcessSearch(Value);
+             ProcessSearch(Value);
         }
-
-        public void Enter(KeyboardEventArgs e)
+        public void EnterHandler(KeyboardEventArgs e)
         {
+            Logger.Information($"Keypress {e.Key} {e.Code}");
+
             if (e.Code == "Enter" || e.Code == "NumpadEnter")
             {
+                Logger.Information($"Keypress {e.Key} {e.Code} Value={Value}");
                 ProcessSearch(Value);
+            }
+            else if(e.Code == "Escape")
+            {
+                Navi.NavigateTo(Navi.BaseUri);
             }
         }
 
         public void ProcessSearch(string SearchText)
         {
-            Logger.Information("Navigating to search text="+SearchText);
-            MyNavigationManager.NavigateTo(MyNavigationManager.BaseUri + $@"search\{SearchText}");
-            MyComponentHub.Search(SearchText);
+            if (string.IsNullOrEmpty(Value)) return;
+            Logger.Information($"Performing search with text={SearchText}");
+            
+            Navi.NavigateTo(Navi.BaseUri + $@"search\{SearchText}");
+            
+            CompHub.Search(SearchText);
         }
         protected override void OnInitialized()
         {
-            Value = "";
-            MainSearchField
+            Nav.LocationChanged += (o, e) => {
+                if (e.Location == Nav.BaseUri)
+                {
+                    Value = "";
+                    ResetSearchBarElementClass();
+                    StateHasChanged();
+                }
+            };
         }
 
     }

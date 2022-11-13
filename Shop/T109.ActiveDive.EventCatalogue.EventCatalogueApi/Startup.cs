@@ -52,7 +52,7 @@ namespace T109.ActiveDive.EventCatalogue.EventCatalogueApi
                 options.AddPolicy(name: MyAllowSpecificOrigins,
                                   builder =>
                                   {
-                                      builder.WithOrigins("http://activediving.t109.tech",
+                                      builder.WithOrigins("https://activediving.t109.tech",
                                                           "https://activediveeventapi.t109.tech",
                                                           "https://localhost:44350",
                                                           "https://localhost:44372");
