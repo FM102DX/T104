@@ -165,7 +165,7 @@ namespace T109.ActiveDive.DataAccess.DataAccess
             T item = null;
             try
             {
-                var response = await httpClient.GetAsync($"{getByIdOrNullHostPath}");
+                var response = await httpClient.GetAsync($"{getByIdOrNullHostPath}{id}");
                 var json = await response.Content.ReadAsStringAsync();
                 switch (response.StatusCode)
                 {

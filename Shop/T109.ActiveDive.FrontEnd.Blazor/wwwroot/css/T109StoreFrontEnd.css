@@ -48,10 +48,11 @@ div {
         width: 100%;
     }
 
-    div.SkuDivision {
+    div.ShopItemCollection {
         min-height: 1450px;
         margin-top: 30px;
     }
+
 
     div.bottombar {
         height: 30px;
@@ -252,6 +253,59 @@ button#MainSearchButton {
 
 
 /*  ***********  SHOP ITEM PAGE ***************/
+div.shopitem-detail-page {
+    min-height: 1450px;
+    margin-top: 30px;
+    
+}
+
+div.shopitem-block
+{
+    width:1200px;
+    margin-left:0px;
+}
+
+div.shopitem-picture-name-price-block {
+    
+    height: 600px;
+    background-color:yellow;
+
+}
+div.shopitem-description-block {
+    
+    height: 300px;
+    background-color: green;
+}
+div.shopitem-description-block {
+    
+    height: 300px;
+    background-color: green;
+}
+div.shopitem-comments-block {
+    
+    height: 300px;
+    background-color:darkorange;
+}
+
+div.shopitem-block-separator {
+    float: left;
+    clear: both;
+}
+
+div.shopitem-picture-block {
+    width: 600px;
+    height: 100%;
+    background-color: antiquewhite;
+    float: left;
+}
+div.shopitem-pricing-block {
+    float: left;
+    width: 450px;
+    height: 100%;
+    background-color: cornflowerblue;
+}
+
+
 
 div.SkuName {
     float: left;
@@ -403,4 +457,39 @@ div.SkuDetailPageSmallPicSelected {
     border-style: solid;
     border-width: 3px;
     border-color: grey;
+}
+
+
+/* *********************** COMPONENTS ***************************** */
+
+/* *********************** IMAGE SELECTOR ************************* */
+
+div.display-image-with-selector__container {
+    background-color: blueviolet;
+}
+div.display-image-with-selector__image {
+    background-color:yellow;
+}
+div.display-image-with-selector__selector {
+    background-color:coral;
+}
+div.display-image-with-selector__part{
+    float:left;
+}
+img.display-image-with-selector__image{
+    width:400px;
+
+}
+div.imgselector__thumb-image-wrap{
+    float:left;
+    padding:7px;
+    cursor:pointer;
+}
+div.thumb-image-wrap_selected{
+    border: 1px solid;
+    border-color:grey;
+}
+div.thumb-image-wrap_regular {
+    border: 1px solid;
+    border-color: aliceblue;
 }

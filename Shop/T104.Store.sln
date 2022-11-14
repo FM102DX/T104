@@ -41,15 +41,15 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "T109", "T109", "{8BDA9738-C
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ActiveDive", "ActiveDive", "{3FFECEF9-D8B4-4803-8345-A18D6255A99D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "T109.ActiveDive.EventCatalogue.EventCatalogueApi", "T109.ActiveDive.EventCatalogue.EventCatalogueApi\T109.ActiveDive.EventCatalogue.EventCatalogueApi.csproj", "{BB127B6B-3A8A-4809-B68B-3D6C9952D3CC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "T109.ActiveDive.EventCatalogue.EventCatalogueApi", "T109.ActiveDive.EventCatalogue.EventCatalogueApi\T109.ActiveDive.EventCatalogue.EventCatalogueApi.csproj", "{BB127B6B-3A8A-4809-B68B-3D6C9952D3CC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "T109.ActiveDive.Core", "T109.ActiveDive.Models\T109.ActiveDive.Core.csproj", "{E53C4D88-7428-4383-BF3D-CBAFEE152CA2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "T109.ActiveDive.Core", "T109.ActiveDive.Models\T109.ActiveDive.Core.csproj", "{E53C4D88-7428-4383-BF3D-CBAFEE152CA2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "T109.ActiveDive.Service", "T109.ActiveDive.Service\T109.ActiveDive.Service.csproj", "{118FBDF7-A355-4AEA-8DC0-A5458FA70E70}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "T109.ActiveDive.Service", "T109.ActiveDive.Service\T109.ActiveDive.Service.csproj", "{118FBDF7-A355-4AEA-8DC0-A5458FA70E70}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "T104", "T104", "{EDCCEBA0-37C8-467D-93A5-8C9EB35894CB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "T109.ActiveDive.FrontEnd.Blazor", "T109.ActiveDive.FrontEnd.Blazor\T109.ActiveDive.FrontEnd.Blazor.csproj", "{B8FEB052-1940-414E-BEC1-FE86AD73A848}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "T109.ActiveDive.FrontEnd.Blazor", "T109.ActiveDive.FrontEnd.Blazor\T109.ActiveDive.FrontEnd.Blazor.csproj", "{B8FEB052-1940-414E-BEC1-FE86AD73A848}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "T109.ActiveDive.DataAccess", "T109.ActiveDive.DataAccess\T109.ActiveDive.DataAccess.csproj", "{904485D5-A6B1-4840-9280-AAB2F4077C01}"
 EndProject

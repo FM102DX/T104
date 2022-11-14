@@ -26,12 +26,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Content Update="Components\ObjectSelector\ObjectSelector.razor">
-      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
-    </Content>
-    <Content Update="Components\ObjectSelector\SelectableObjectComponent.razor">
-      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
-    </Content>
     <Content Update="Components\Search\Search.razor">
       <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
     </Content>

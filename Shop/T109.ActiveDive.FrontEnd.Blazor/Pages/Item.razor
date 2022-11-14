@@ -1,36 +1,35 @@
 ﻿@page "/item/{ItemId:guid}"
 @using T109.ActiveDive.FrontEnd.Blazor.Components
 @using T109.ActiveDive.FrontEnd.Blazor.Pages
-@using T109.ActiveDive.FrontEnd.Blazor.Components.ObjectSelector; 
+@using T109.ActiveDive.FrontEnd.Blazor.Components.DisplayImageWithSelector;
 
-<div class="SkuDetailPage">
+<div class="shopitem-detail-page">
 
-   <div class="SkuName">
-     <p> @ActualItem.Name</p>
+   
+    <div class="shopitem-picture-name-price-block shopitem-block">
+
+        <div class="shopitem-picture-block">
+            <DisplayImageWithSelector ContainerWidth="500" ImgList="@ImgList" ContainerHeight="500" SelectorPosition="DisplayImageWithSelector.SelectorPositionEnum.bottom" ></DisplayImageWithSelector>
+        </div>
+
+        <div class="shopitem-pricing-block">
+        
+        </div>
+
     </div>
-
-    <div class="SkuNameSep"></div>
+    <div class="shopitem-block-separator"></div>
+    <div class="shopitem-description-block shopitem-block"></div>
+    <div class="shopitem-block-separator"></div>
+    <div class="shopitem-comments-block shopitem-block"></div>
+    <div class="shopitem-block-separator"></div>
     
-    <ObjectSelector @ref="SmallImgSelector"
-                    Objects="@DisplayedObjects" 
-                    SelectorPosition="@SelectorPosition" 
-                    HolderDivClass="MiniImageHolder SkuDetailPagePart" 
-                    RegularObjectDivClass="SkuDetailPageSmallPic SkuDetailPageSmallPicRegular" 
-                    SelectedObjectDivClass ="SkuDetailPageSmallPic SkuDetailPageSmallPicSelected"
-                    ObjectHeight ="0"
-                    ObjectWidth="70" />
- 
- <div class="BigImageHolder SkuDetailPagePart">
-     <img width="300px" src="@CurrentImageFullPath"/>
- </div>
+    
+    
+    
+    
+    
+    
 
- <div class="DescriptionHolder SkuDetailPagePart">
-      <p> @ActualItem.Description </p>
-</div>
-
-<div class="PriceBuyCard">
-      <p> @ActualItem.Alias руб.</p>
-</div>
 
 
 

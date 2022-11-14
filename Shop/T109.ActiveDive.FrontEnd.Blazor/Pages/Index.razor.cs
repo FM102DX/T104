@@ -10,8 +10,6 @@ namespace T109.ActiveDive.FrontEnd.Blazor.Pages
         [Inject]
         public Serilog.ILogger Logger { get; set; }
 
-        public ShopItemCollectionUsageCaseEnum UsageCase { get=> ShopItemCollectionUsageCaseEnum.MainPageAppearamce; }
-
         protected override async Task OnInitializedAsync()
         {
             Logger.Information("index page opened");
